@@ -12,3 +12,19 @@ test('test for constructor values for manger object', ()=>{
 test('test for name from getName()method', () =>{
     expect(manager.getName()).toBe('devi');
 })
+
+test("test for ID from getId()method", () => {
+  expect(manager.getId()).toBe("123456");
+});
+
+test("test for email from getEmail()method", () => {
+  expect(manager.getEmail()).toBe("d.hall@gmail.com");
+});
+
+test("test for number from getOfficeNumber()method", () => {
+  expect(manager.getOfficeNumber()).toBe("305");
+});
+
+test("test for role from getRole()method", () => {
+  expect(manager.getRole()).toBe("Manager");
+});
