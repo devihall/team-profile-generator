@@ -25,5 +25,5 @@ test("test to get the school of intern with getSchool() method", () => {
 });
 
 test("test to get the role of intern with getRole() method", () => {
-  expect(intern.getRole()).toBe("Employee");
+  expect(intern.getRole()).toBe("Intern");
 });
