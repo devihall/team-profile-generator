@@ -110,6 +110,13 @@ const employeeQuestions = [
         return true;
       }
     },
+    when: ({ userSelection }) => {
+      if (userSelection === "I want to add an engineer") {
+        return true;
+      } else {
+        false;
+      }
+    },
   },
   {
     type: "input",
@@ -123,6 +130,13 @@ const employeeQuestions = [
         return true;
       }
     },
+    when: ({ userSelection }) => {
+      if (userSelection === "I want to add an engineer") {
+        return true;
+      } else {
+        false;
+      }
+    },
   },
   {
     type: "input",
@@ -134,6 +148,13 @@ const employeeQuestions = [
         return false;
       } else {
         return true;
+      }
+    },
+    when: ({ userSelection }) => {
+      if (userSelection === "I want to add an engineer") {
+        return true;
+      } else {
+        false;
       }
     },
   },
@@ -169,6 +190,13 @@ const employeeQuestions = [
         return true;
       }
     },
+    when: ({ userSelection }) => {
+      if (userSelection === "I want to add an intern") {
+        return true;
+      } else {
+        false;
+      }
+    },
   },
   {
     type: "input",
@@ -182,6 +210,13 @@ const employeeQuestions = [
         return true;
       }
     },
+    when: ({ userSelection }) => {
+      if (userSelection === "I want to add an intern") {
+        return true;
+      } else {
+        false;
+      }
+    },
   },
   {
     type: "input",
@@ -193,6 +228,13 @@ const employeeQuestions = [
         return false;
       } else {
         return true;
+      }
+    },
+    when: ({ userSelection }) => {
+      if (userSelection === "I want to add an intern") {
+        return true;
+      } else {
+        false;
       }
     },
   },
