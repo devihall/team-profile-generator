@@ -50,9 +50,6 @@ module.exports = (userAnswersObj) => {
     );
 
     return `
-    your raw HTML goes here, which is returned. Here is where you interpolate, or insert
-    managerName, managerId. Also, engineerName, internName
-    generateManagerHtmlCard(myManager)
 
     <!DOCTYPE html>
     <html lang="en">
