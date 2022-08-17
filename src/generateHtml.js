@@ -1,5 +1,7 @@
 // you're also going to import your classes, i.e., Manager, Engineer Intern
 const Manager = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
+const Intern = require("../lib/Intern");
 
 // do the same for engineer and intern
 
@@ -11,13 +13,41 @@ function generateManagerHtmlCard(manager) {
     `
 }
 
+function generateEngineerHtmlCard(engineer) {
+  return `
+    ${
+      (engineer.getName(), engineer.getId(), engineer.getEmail(), engineer.getGithubLink())
+    }
+    
+    `
+}
+
+
+function generateInternHtmlCard(intern) {
+    return `
+    ${intern.getName(), intern.getId(), intern.getEmail(), intern.getSchool()}
+    
+    `
+}
+
 // export the functions, you may need to allow for passing an argument into this function
 // you will need to!
 module.exports = (userAnswersObj) => {
     // here you might want to destructure your manager's info from the answersObj
-    const { managerName, managerId, managerEmail, managerOfficeNumber } =
+    const { managerName, managerId, managerEmail, managerOfficeNumber
+    } = userAnswersObj;
+    const myManager = new Manager( managerName, managerId, managerEmail, managerOfficeNumber
+    );
+
+    const { engineerName, engineerId, engineerEmail, engineerGithub } =
       userAnswersObj;
-    // const myManager = new Manager(managerName, managerId, etc)
+    const myEngineer = new Engineer( engineerName, engineerId, engineerEmail, engineerGithub
+    );
+
+    const {internName, internID, internEmail, internSchool 
+    } =  userAnswersObj;
+    const myIntern = new Intern( internName, internID, internEmail, internSchool
+    );
 
     return `
     your raw HTML goes here, which is returned. Here is where you interpolate, or insert
@@ -56,23 +86,23 @@ module.exports = (userAnswersObj) => {
 
         <div class="card text-bg-primary mb-3" style="width: 18rem">
         <div class="card-header">
-        <i class="fa-solid fa-laptop-code" aria-hidden="true">Engineer</i>
+        <i class="fa-solid fa-laptop-code" aria-hidden="true">Engineer ${engineerName}</i>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID</li>
-            <li class="list-group-item">Email</li>
-            <li class="list-group-item">GitHub</li>
+            <li class="list-group-item">ID ${engineerId}</li>
+            <li class="list-group-item">Email ${engineerEmail} </li>
+            <li class="list-group-item">GitHub ${engineerGithub}</li>
         </ul>
         </div>
 
         <div class="card text-bg-primary mb-3" style="width: 18rem">
         <div class="card-header">
-        <i class="fas fa-user-graduate" aria-hidden="true">Intern</i>
+        <i class="fas fa-user-graduate" aria-hidden="true">Intern ${internName} </i>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID</li>
-            <li class="list-group-item">Email</li>
-            <li class="list-group-item">School</li>
+            <li class="list-group-item">ID ${internID}</li>
+            <li class="list-group-item">Email ${internEmail}</li>
+            <li class="list-group-item">School ${internSchool}</li>
         </ul>
         </div>
 
