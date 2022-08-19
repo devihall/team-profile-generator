@@ -7,50 +7,7 @@ const Intern = require("../lib/Intern");
 
 // in this file you're going to have a (some?) functions
 function generateManagerHtmlCard(manager) {
-    return `
-    ${manager.getName(), manager.getId(), manager.getEmail(), manager.getOfficeNumber()}
-    
-    `
-}
-
-function generateEngineerHtmlCard(engineer) {
   return `
-    ${
-      (engineer.getName(), engineer.getId(), engineer.getEmail(), engineer.getGithubLink())
-    }
-    
-    `
-}
-
-
-function generateInternHtmlCard(intern) {
-    return `
-    ${intern.getName(), intern.getId(), intern.getEmail(), intern.getSchool()}
-    
-    `
-}
-
-// export the functions, you may need to allow for passing an argument into this function
-// you will need to!
-module.exports = (userAnswersObj) => {
-    // here you might want to destructure your manager's info from the answersObj
-    const { managerName, managerId, managerEmail, managerOfficeNumber
-    } = userAnswersObj;
-    const myManager = new Manager( managerName, managerId, managerEmail, managerOfficeNumber
-    );
-
-    const { engineerName, engineerId, engineerEmail, engineerGithub } =
-      userAnswersObj;
-    const myEngineer = new Engineer( engineerName, engineerId, engineerEmail, engineerGithub
-    );
-
-    const {internName, internID, internEmail, internSchool 
-    } =  userAnswersObj;
-    const myIntern = new Intern( internName, internID, internEmail, internSchool
-    );
-
-    return `
-
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -63,49 +20,103 @@ module.exports = (userAnswersObj) => {
     </head>
     <body>
         <header>
+        
             <div class="card text-center text-bg-danger mb-3">
                 <div class="card-header">
                 <h1>My Team</h1>
             </div>
             </div>
         </header>
-
-        <div class="card text-bg-primary mb-3" style="width: 18rem">
+    <div class="card text-bg-primary mb-3" style="width: 18rem">
         <div class="card-header">
-        <i class="fas fa-mug-hot" aria-hidden="true">Manager ${managerName}</i>
+        <i class="fas fa-mug-hot" aria-hidden="true">Manager ${manager.getName()}</i>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID ${managerId}</li>
-            <li class="list-group-item">Email ${managerEmail}</li>
-            <li class="list-group-item">Office Number ${managerOfficeNumber} </li>
+            <li class="list-group-item">ID ${manager.getId()}</li>
+            <li class="list-group-item">Email ${manager.getEmail()}</li>
+            <li class="list-group-item">Office Number ${manager.getOfficeNumber()} </li>
         </ul></div>
-        
+    `;
+}
 
+function generateRestOfTeamCards({ restOfTeam }) {
+  let masterString = "";
+
+  restOfTeam.forEach((employee) => {
+    if (employee.userSelection === "I want to add an engineer") {
+      const myEngineer = new Engineer(
+        employee.engineerName,
+        employee.engineerId,
+        employee.engineerEmail,
+        employee.engineerGithub
+      );
+      let engineerString = `
         <div class="card text-bg-primary mb-3" style="width: 18rem">
-        <div class="card-header">
-        <i class="fa-solid fa-laptop-code" aria-hidden="true">Engineer ${engineerName}</i>
+            <div class="card-header">
+            <i class="fa-solid fa-laptop-code" aria-hidden="true">Engineer ${myEngineer.engineerName}</i>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID ${engineerId}</li>
-            <li class="list-group-item">Email ${engineerEmail} </li>
-            <li class="list-group-item">GitHub ${engineerGithub}</li>
+            <li class="list-group-item">ID ${myEngineer.engineerId}</li>
+            <li class="list-group-item">Email ${myEngineer.engineerEmail} </li>
+            <li class="list-group-item">GitHub ${myEngineer.engineerGithub}</li>
         </ul>
         </div>
+            `;
+        masterString += engineerString // masterString = masterString + engineerString
+    } else   {(employee.userSelection === "I want to add and Intern")
+       const myIntern = new Intern (
+        employee.internName,
+        employee.internID,
+        employee.internEmail,
+        employee.internSchool
+       )
 
+        let internString = `
         <div class="card text-bg-primary mb-3" style="width: 18rem">
         <div class="card-header">
-        <i class="fas fa-user-graduate" aria-hidden="true">Intern ${internName} </i>
+        <i class="fas fa-user-graduate" aria-hidden="true">Intern ${employee.internName} </i>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID ${internID}</li>
-            <li class="list-group-item">Email ${internEmail}</li>
-            <li class="list-group-item">School ${internSchool}</li>
+            <li class="list-group-item">ID ${employee.internID}</li>
+            <li class="list-group-item">Email ${employee.internEmail}</li>
+            <li class="list-group-item">School ${employee.internSchool}</li>
         </ul>
         </div>
 
     </body>
     </html>
+        `
+       
+    masterString+= internString
+    }
+  });
 
-
+  // return your masterString
+  return `
+        
     `;
 }
+
+// export the functions, you may need to allow for passing an argument into this function
+// you will need to!
+module.exports = (userAnswersObj) => {
+  // here you might want to destructure your manager's info from the answersObj
+  const {
+    managerName,
+    managerId,
+    managerEmail,
+    managerOfficeNumber,
+    ...employeesObject
+  } = userAnswersObj;
+  const myManager = new Manager(
+    managerName,
+    managerId,
+    managerEmail,
+    managerOfficeNumber
+  );
+  return `
+    ${generateManagerHtmlCard(myManager)}
+    ${generateRestOfTeamCards(employeesObject)}
+  `;
+
+};

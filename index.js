@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // import the function which generates the HTML
-const generateMyHtml = require("./src/generateHtml");
+const htmlTemplate = require("./src/generateHtml");
 
 // 1. Create questions for prompting user about manager, engineer, and intern
 // 2. Pass those answers (which are inside answers object) into then method, which is going
@@ -40,7 +40,7 @@ const questions = [
   },
   {
     type: "input",
-    name: "managerEmail;",
+    name: "managerEmail",
     message: "What is the manager's email?",
     validate: (enteredEmail) => {
       if (!enteredEmail) {
@@ -261,13 +261,13 @@ function promptForMoreTeamMembers(team){
   .prompt(employeeQuestions)
   .then( (newTeamMember) => {
     if(newTeamMember.userSelection === 'I am finished building my team') {
-      return generateMyHtml(team);
+      console.log(team.restOfTeam)
+      return htmlTemplate(team);
     }
-    team.restOfTeam.push[newTeamMember];
+    team.restOfTeam.push(newTeamMember);
     return promptForMoreTeamMembers(team);
   })
   ;
-
 }
 
 beginPrompts()
